@@ -14,7 +14,6 @@ function App() {
   let [myStyle,fetchStyle] = useState({color:"white"}); //for updating value of sum button in result area
   let [result,fetchRes] = useState(0);
 
-  let a = 0 ;
  
 
 
