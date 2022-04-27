@@ -44,13 +44,15 @@ jobs:
           name: react-github-actions-build
           path: build
 
-      - uses: sonarsource/sonarqube-scan-action@master
+      - name: SonarQube Code Analysis
+        uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       
       # Fail the workflow if Qualit Gate status fails
-      - uses: sonarsource/sonarqube-quality-gate-action@master
+      - name: Sonar Quality Gate Check
+        uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
