@@ -19,6 +19,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Import Secrets
+        uses: hashicorp/vault-action@v2.4.0
+        with:
+          url: http://127.0.0.1:8200
+          tlsSkipVerify: true
+          token: ${{ secrets.VAULT_TOKEN }}
+          secrets: |
+            secret/data/sonar SONAR_TOKEN ;
+            secret/data/sonar SONAR_HOST_URL ;
+            secret/data/sonar DIGITALOCEAN_ACCESS_TOKEN
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -47,15 +58,15 @@ jobs:
       - name: SonarQube Code Analysis
         uses: sonarsource/sonarqube-scan-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
       
       # Fail the workflow if Qualit Gate status fails
       - name: Sonar Quality Gate Check
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
         
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
@@ -63,7 +74,7 @@ jobs:
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          token: ${{ env.DIGITALOCEAN_ACCESS_TOKEN }}
     
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
