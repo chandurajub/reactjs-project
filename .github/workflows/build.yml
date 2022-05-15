@@ -16,7 +16,7 @@ env:
 jobs:
   build:
     name: Build
-    runs-on: self-hosted
+    runs-on: ubuntu
 
     steps:
       - name: Import Secrets
