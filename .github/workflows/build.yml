@@ -22,7 +22,7 @@ jobs:
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
-          url: https://1a34541f35063d.lhrtunnel.link
+          url: https://2052e5040f0241.lhrtunnel.link/
           tlsSkipVerify: true
           token: ${{ secrets.VAULT_TOKEN }}
           secrets: |
