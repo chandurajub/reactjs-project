@@ -20,8 +20,8 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - run: env
       - name: Import Secrets
-        run: env
         uses: hashicorp/vault-action@v2.4.0
         with:
           url: ${{ env.VAULT_URL }}
