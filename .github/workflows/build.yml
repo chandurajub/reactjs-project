@@ -12,8 +12,7 @@ env:
   # VERSION: 1.0
   CLUSTER_NAME: "k8s-dotnet-cluster"
   DEPLOYMENT_NAME: "react-project"
-  VAULT_URL:
-  VAULT_TOKEN:
+ 
 
 jobs:
   build:
@@ -24,9 +23,9 @@ jobs:
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
-          url: $VAULT_URL
+          url: {{ $VAULT_URL }}
           tlsSkipVerify: true
-          token: $VAULT_TOKEN
+          token: {{ $VAULT_TOKEN }}
           secrets: |
             secret/data/sonar SONAR_TOKEN ;
             secret/data/sonar SONAR_HOST_URL ;
