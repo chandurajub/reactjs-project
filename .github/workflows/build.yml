@@ -12,8 +12,8 @@ env:
   # VERSION: 1.0
   CLUSTER_NAME: "k8s-dotnet-cluster"
   DEPLOYMENT_NAME: "react-project"
-  VAULT_URL: 
-  VAULT_TOKEN:
+  VAULT_URL: ""
+  VAULT_TOKEN: ""
  
 
 jobs:
