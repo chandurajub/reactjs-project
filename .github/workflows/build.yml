@@ -23,9 +23,9 @@ jobs:
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
-          url: {{ $VAULT_URL }}
+          url: ${{ env.VAULT_URL }}
           tlsSkipVerify: true
-          token: {{ $VAULT_TOKEN }}
+          token: ${{ env.VAULT_TOKEN }}
           secrets: |
             secret/data/sonar SONAR_TOKEN ;
             secret/data/sonar SONAR_HOST_URL ;
