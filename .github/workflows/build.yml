@@ -23,6 +23,8 @@ jobs:
 
     steps:
       - run: env
+      - run: echo "varient=test" >> $GITHUB_ENV
+      - run: $varient
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
