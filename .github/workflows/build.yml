@@ -23,7 +23,8 @@ jobs:
     steps:
       - run: env
       - run: echo "varient=test" >> $GITHUB_ENV
-      - run: echo "${{ env.varient }}" 
+      - run: echo "${{ env.varient }}"
+      - run: cat /home/github-runner/vault >> $GITHUB_ENV
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
