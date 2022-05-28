@@ -21,14 +21,13 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - run: |
+      - name: Append Config file
+        run: |
             cat /home/github-runner/vault >> $GITHUB_ENV
-            echo "::add-mask::$VAULT_URL"
+           
       - run: |
-            vault_addr=$VAULT_URL
-             echo "::add-mask::$vault_addr"
-             echo "::set-output name=password::$vault_addr"
-            
+             echo "::add-mask::$VAULT_URL"
+             echo "::add-mask::$VAULT_TOKEN"
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
