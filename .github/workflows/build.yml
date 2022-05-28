@@ -25,7 +25,8 @@ jobs:
         run: |
             cat /home/github-runner/vault >> $GITHUB_ENV
            
-      - run: |
+      - name: Mask 
+        run: |
              echo "::add-mask::$VAULT_URL"
              echo "::add-mask::$VAULT_TOKEN"
       - name: Import Secrets
