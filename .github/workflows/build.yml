@@ -24,8 +24,8 @@ jobs:
       - run: cat /home/github-runner/vault >> $GITHUB_ENV
       - run: echo "::add-mask::$GITHUB_ENV"
       - run: echo $GITHUB_ENV
-      - run: echo $VAULT_URL
       - run: echo "::add-mask::$VAULT_URL"
+      - run: echo $VAULT_URL
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
